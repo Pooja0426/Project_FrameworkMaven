@@ -10,29 +10,15 @@ public class SwagLabHomePage {
 	
 	@FindBy(xpath="//div[@class='app_logo']") private WebElement logo;
 	@FindBy(xpath="//button[@id='react-burger-menu-btn']") private WebElement openMenu;
-	
+	@FindBy(xpath="//a[@id='item_2_title_link']")private WebElement onesieProduct;
+	@FindBy(xpath="(//div[@class=\"inventory_item_price\"])[5]") private WebElement onesieProductPrice;
+	@FindBy(xpath="(//button[text()='Add to cart'])[5]") private WebElement onesieProductAddToCart;
 	public SwagLabHomePage(WebDriver driver)
 	{
 		PageFactory.initElements(driver, this);
 	}
 
-//	public void verifySwagLabLogo(String expText)
-//	{
-//		
-//		String actTitle= logo.getText();
-//		String expTitle="Swag Labs";
-//		
-//		if(actTitle.equals(expTitle))
-//		{
-//			System.out.println("TC pass");
-//		}
-//		else
-//		{
-//			System.out.println("TC fail");
-//		}
-//		
-//		
-//	}
+
 	
 	public String getSwagLabLogoText()
 	{
@@ -43,5 +29,25 @@ public class SwagLabHomePage {
 	public void clickSwagLabOnOPenMenu()
 	{
 		openMenu.click();
+	}
+	
+	public String getSwagLabHomePageOnesieProduct()
+	{
+		String actText=onesieProduct.getText();
+		return actText;
+		
+	}
+	
+	public double getSwagLabHomePagePriceProduct()
+	{
+		String productPrice=onesieProductPrice.getText(); //$7.99
+		 productPrice=productPrice.substring(1);    //7.99
+		 double productInDouble=Double.parseDouble(productPrice);  //String->Double convert
+		return productInDouble;
+		
+	}
+
+	public void getSwagLabHomePageOnesieProductAddToCart() {
+		onesieProductAddToCart.click();
 	}
 }

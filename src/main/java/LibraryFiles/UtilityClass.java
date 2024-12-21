@@ -24,7 +24,7 @@ public class UtilityClass {
 	//@AuthorName: Pooja
 	public static String getTD(int rowIndex,int colIndex) throws EncryptedDocumentException, IOException 
 	{
-		FileInputStream file=new FileInputStream("C:\\Users\\vozon\\eclipse-workspace\\Project_SeleniumMaven\\TestData\\Swag_LabDDF_Data.xlsx");
+		FileInputStream file=new FileInputStream(System.getProperty("user.dir")+"\\TestData\\Swag_LabDDF_Data.xlsx");
 	    Sheet sh=WorkbookFactory.create(file).getSheet("DDF");
 	    
 		String value=sh.getRow(rowIndex).getCell(colIndex).getStringCellValue();
@@ -32,11 +32,19 @@ public class UtilityClass {
 	}
 
 	
+	public static double getTDDouble(int rowIndex,int colIndex) throws EncryptedDocumentException, IOException 
+	{
+		FileInputStream file=new FileInputStream(System.getProperty("user.dir")+"\\TestData\\Swag_LabDDF_Data.xlsx");
+	    Sheet sh=WorkbookFactory.create(file).getSheet("DDF");
+	    
+		double value=sh.getRow(rowIndex).getCell(colIndex).getNumericCellValue();
+		return value;
+	}
 	
 	public static void captureSS(WebDriver driver,int TCID) throws IOException
 	{
 		File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		File dest= new File("C:\\Users\\vozon\\eclipse-workspace\\Project_SeleniumMaven\\Screenshot\\TestCaseID"+TCID+".jpg");
+		File dest= new File(System.getProperty("user.dir")+"\\Screenshot\\TestCaseID"+TCID+".jpg");
 		
 		FileHandler.copy(src, dest);
 	}
@@ -44,7 +52,7 @@ public class UtilityClass {
 	
 	public static String getPFData(String key) throws IOException
 	{
-		FileInputStream file = new FileInputStream("C:\\Users\\vozon\\eclipse-workspace\\Project_SeleniumMaven\\PropertyFile.properties");
+		FileInputStream file = new FileInputStream(System.getProperty("user.dir")+"\\PropertyFile.properties");
 		Properties p=new Properties();
 		p.load(file);
 		String value=p.getProperty(key);
